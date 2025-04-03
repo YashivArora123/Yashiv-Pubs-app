@@ -1,12 +1,14 @@
+// src/app/app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AuthorsComponent } from './authors/authors.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [AuthorsComponent],
+  template: `
+    <h1>Pubs Dashboard</h1>
+    <app-authors></app-authors>
+  `
 })
-export class AppComponent {
-  title = 'pubs-app';
-}
+export class AppComponent {}

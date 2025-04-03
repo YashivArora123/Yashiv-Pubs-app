@@ -1,0 +1,70 @@
+<h2>Authors</h2>
+
+<form (ngSubmit)="addAuthor()" #authorForm="ngForm">
+    <input
+    name="au_id"
+    [(ngModel)]="newAuthor.au_id"
+    (input)="formatAuthorId()"
+    placeholder="ID"
+    required
+  />
+  
+  <input name="au_fname" [(ngModel)]="newAuthor.au_fname" placeholder="First Name" required />
+  <input name="au_lname" [(ngModel)]="newAuthor.au_lname" placeholder="Last Name" required />
+  <input name="phone" [(ngModel)]="newAuthor.phone" placeholder="Phone" />
+  <input name="city" [(ngModel)]="newAuthor.city" placeholder="City" />
+  <button type="submit">Add Author</button>
+</form>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search authors" />
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;">
+  <ng-container matColumnDef="au_id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+    <td mat-cell *matCellDef="let author">{{ author.au_id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="au_fname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+    <td mat-cell *matCellDef="let author">{{ author.au_fname }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="au_lname">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+    <td mat-cell *matCellDef="let author">{{ author.au_lname }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+    <td mat-cell *matCellDef="let author">{{ author.phone }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+    <td mat-cell *matCellDef="let author">{{ author.city || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+    <td mat-cell *matCellDef="let author">{{ author.state || '—' }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="contract">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Contract</th>
+    <td mat-cell *matCellDef="let author">{{ author.contract ? '✔️' : '❌' }}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let author">
+      <button mat-button color="warn" (click)="deleteAuthor(author.au_id)">Delete</button>
+    </td>
+  </ng-container>
+  
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  
+</table>

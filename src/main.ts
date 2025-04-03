@@ -1,6 +1,8 @@
+// src/main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AuthorsComponent } from './app/authors/authors.component';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AuthorsComponent, {
+  providers: [provideHttpClient(withFetch())] 
+});
